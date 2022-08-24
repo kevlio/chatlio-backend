@@ -7,24 +7,11 @@ const roomsModel = require("./models/rooms.model");
 
 const logMessages = require("./middleware/utils");
 
-const server = http.createServer((request, response) => {
-  // 1. Tell the browser everything is OK (Status code 200), and the data is in plain text
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Request-Method", "*");
-  res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET");
-  res.setHeader("Access-Control-Allow-Headers", "*");
-
-  // 2. Write the announced text to the body of the page
-  response.write("Hello, World!\n");
-
-  // 3. Tell the server that all of the response headers and body have been sent
-  response.end();
-});
-
-const io = new Server(server, {
+const io = new Server({
   cors: {
-    origin: "*",
+    origin: "https://chatlio--backend.herokuapp.com",
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
