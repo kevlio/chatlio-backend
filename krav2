@@ -1,0 +1,28 @@
+Kunskapskontroll 1: Publicering av Chatt-app
+Förfaller 26 augusti 2022 kl. 17:00
+Instruktioner
+Det är dags för första och sista kunskapskontrollen i kursen Webbpublicering!
+
+I denna kunskapskontrollen ska du publicera din Chatt-applikation som du byggde i föregående kurs på Heroku.
+Det är då "hela stacken" som ska deployas, med Frontend, backend och databas (om du använde dig av en extern databas).
+
+För er som använde SQLite3:
+Varför SQLite är en dålig idé på Heroku: https://devcenter.heroku.com/articles/sqlite3
+Hur man går från SQLite till node-postgres: https://node-postgres.com/
+Heroku Postgres: https://devcenter.heroku.com/articles/heroku-postgresql
+
+Inlämningen kommer ske med följande delar:
+Länk till Frontend
+Länk till Backend
+Länk till båda Github Repositories
+
+Inlämningen kommer testas på följande sätt:
+Genom att besöka båda länkarna 
+Manuell genomgång av koden (ex. så ni faktiskt ansluter till en databas)
+
+För att uppnå Godkänt är kraven att:
+Frontenden ska vara deployad som en app på Heroku
+Backenden ska vara deployad som en app på Heroku
+Backenden ska använda en separat databas (ex. Heroku Postgres) och ansluta till denna
+För att uppnå Väl Godkänt är kraven att du behöver implementera följande: 
+Ett Github Actions Workflow som kör en Linter för att kolla kodkvalitén vid push (på minst ett repo)
