@@ -7,7 +7,9 @@ const roomsModel = require("./models/rooms.model");
 
 const logMessages = require("./middleware/utils");
 
-const io = new Server(4000, {
+const PORT = process.env.PORT || 4000;
+
+const io = new Server(PORT, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],

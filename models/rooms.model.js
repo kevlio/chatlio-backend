@@ -1,4 +1,4 @@
-const db = require("../config/postgres");
+const db = require("../config/db");
 
 // ADD ONE ROOM
 async function addRoom(roomName) {
@@ -13,32 +13,56 @@ async function addRoom(roomName) {
     return false;
   }
 
-  const sql = "INSERT INTO rooms (room_name) VALUES ($1)";
-  const result = await db.query(sql, [id, roomName]);
-  console.log(result);
-  return result.rows;
+  const sql = "INSERT INTO rooms (room_name) VALUES (?)";
+  return new Promise((resolve, reject) => {
+    db.query(sql, [roomName], (error) => {
+      if (error) {
+        console.error(error.message);
+        reject(error);
+      }
+      resolve();
+    });
+  });
 }
 
 function getRooms() {
   const sql = "SELECT * FROM rooms";
-  const result = await db.query(sql);
-  console.log(result);
-  return result.rows;
+  return new Promise((resolve, reject) => {
+    db.query(sql, (error, rows) => {
+      if (error) {
+        console.error(error.message);
+        reject(error);
+      }
+      resolve(rows);
+    });
+  });
 }
 
 function getRoom(roomName) {
-  const sql = "SELECT * FROM rooms WHERE room_name = $1";
-  const result = await db.query(sql, roomName);
-  console.log(result);
-  return result.rows;
+  const sql = "SELECT * FROM rooms WHERE room_name = ?";
+  return new Promise((resolve, reject) => {
+    db.query(sql, roomName, (error, rows) => {
+      if (error) {
+        console.error(error.message);
+        reject(error);
+      }
+      resolve(rows);
+    });
+  });
 }
 
 // DELETE ONE ROOM (and messages connected to room)
 function deleteRoom(roomName) {
-  const sql = "DELETE from rooms where room_name = $1";
-  const result = await db.query(sql, roomName);
-  console.log(result);
-  return result.rows;
+  const sql = "DELETE from rooms where room_name = ?";
+  return new Promise((resolve, reject) => {
+    db.query(sql, [roomName], (error) => {
+      if (error) {
+        console.error(error.message);
+        reject(error);
+      }
+      resolve();
+    });
+  });
 }
 
 module.exports = {
