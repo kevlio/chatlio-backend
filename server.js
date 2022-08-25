@@ -9,7 +9,7 @@ const logMessages = require("./middleware/utils");
 
 const io = new Server({
   cors: {
-    origin: ["*", "https://chatlio-frontend.herokuapp.com"],
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST"],
   },
 });
