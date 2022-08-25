@@ -1,17 +1,33 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
-let db;
+// let db;
 
-if (process.env.CLEARDB_DATABASE_URL) {
-  db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
-} else
-  db = mysql.createConnection({
-    user: "root",
-    port: "3306",
-    host: "localhost",
-    password: "password",
-    database: "chatlio",
-  });
+// if (process.env.CLEARDB_DATABASE_URL) {
+//   db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+// } else
+//   db = mysql.createConnection(
+//     // "mysql://b78122d95951de:3e202ce7@eu-cdbr-west-03.cleardb.net/heroku_a29865f5352b027?reconnect=true"
+//     {
+//       host: "eu-cdbr-west-03.cleardb.net",
+//       user: "b78122d95951de",
+//       password: "3e202ce7",
+//       database: "heroku_a29865f5352b027",
+//     }
+//     //   {
+//     //   user: "root",
+//     //   port: "3306",
+//     //   host: "localhost",
+//     //   password: "password",
+//     //   database: "chatlio",
+//     // }
+//   );
+
+const db = mysql.createConnection({
+  host: "eu-cdbr-west-03.cleardb.net",
+  user: "b78122d95951de",
+  password: "3e202ce7",
+  database: "heroku_a29865f5352b027",
+});
 
 const room = `CREATE TABLE IF NOT EXISTS rooms(
   id INT NOT NULL AUTO_INCREMENT,

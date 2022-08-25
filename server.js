@@ -9,7 +9,8 @@ const logMessages = require("./middleware/utils");
 
 const io = new Server({
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: "*",
+    // origin: ["*", "http://localhost:3000", process.env.CLIENT_URL],
     methods: ["GET", "POST"],
   },
 });
@@ -54,6 +55,8 @@ io.use((socket, next) => {
 });
 
 io.on("connection", async (socket) => {
+  console.log(`${socket.id} connected`);
+
   const users = await usersModel.getUsers();
   const rooms = await roomsModel.getRooms();
 
