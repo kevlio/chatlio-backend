@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const schema = process.env.SCHEMA;
 
 // ADD ONE ROOM
 async function addRoom(roomName) {
@@ -13,7 +14,7 @@ async function addRoom(roomName) {
     return false;
   }
 
-  const sql = "INSERT INTO rooms (room_name) VALUES (?)";
+  const sql = `INSERT INTO ${schema}.rooms (room_name) VALUES (?)`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName], (error) => {
       if (error) {
@@ -26,7 +27,7 @@ async function addRoom(roomName) {
 }
 
 function getRooms() {
-  const sql = "SELECT * FROM rooms";
+  const sql = `SELECT * FROM ${schema}.rooms`;
   return new Promise((resolve, reject) => {
     db.query(sql, (error, rows) => {
       if (error) {
@@ -39,7 +40,7 @@ function getRooms() {
 }
 
 function getRoom(roomName) {
-  const sql = "SELECT * FROM rooms WHERE room_name = ?";
+  const sql = `SELECT * FROM ${schema}.rooms WHERE room_name = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, roomName, (error, rows) => {
       if (error) {
@@ -53,7 +54,7 @@ function getRoom(roomName) {
 
 // DELETE ONE ROOM (and messages connected to room)
 function deleteRoom(roomName) {
-  const sql = "DELETE from rooms where room_name = ?";
+  const sql = `DELETE from ${schema}.rooms where room_name = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName], (error) => {
       if (error) {

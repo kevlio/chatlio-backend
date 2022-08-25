@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const schema = process.env.SCHEMA;
 
 // ADD ONE USER
 async function addUser(id, username) {
@@ -14,7 +15,7 @@ async function addUser(id, username) {
     return false;
   }
 
-  const sql = "INSERT INTO users (id, username) VALUES (?, ?)";
+  const sql = `INSERT INTO ${schema}.users (id, username) VALUES (?, ?)`;
   return new Promise((resolve, reject) => {
     db.query(sql, [id, username], (error) => {
       if (error) {
@@ -28,7 +29,7 @@ async function addUser(id, username) {
 
 // GET ALL USERS
 function getUsers() {
-  const sql = "SELECT * FROM users";
+  const sql = `SELECT * FROM ${schema}.users`;
   return new Promise((resolve, reject) => {
     db.query(sql, (error, rows) => {
       if (error) {
@@ -44,7 +45,7 @@ function getUsers() {
 function getOneUser(id, username) {
   console.log(id);
   console.log(username);
-  const sql = "SELECT * FROM users WHERE id = ? AND name = ?";
+  const sql = `SELECT * FROM ${schema}.users WHERE id = ? AND name = ?`;
   return new Promise((resolve, reject) => {
     db.get(sql, [id, username], (error, rows) => {
       if (error) {
@@ -58,7 +59,7 @@ function getOneUser(id, username) {
 
 // UPDATE USERS ACTIVE ROOM / BETTER SOLUTION?
 function updateActiveRoom(roomName, username) {
-  const sql = "UPDATE users SET active_room = ? WHERE username = ?";
+  const sql = `UPDATE ${schema}.users SET active_room = ? WHERE username = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName, username], (error) => {
       if (error) {
@@ -71,7 +72,7 @@ function updateActiveRoom(roomName, username) {
 }
 
 function removeActiveRoom(roomName) {
-  const sql = "UPDATE users SET active_room = null WHERE active_room = ?";
+  const sql = `UPDATE ${schema}.users SET active_room = null WHERE active_room = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, roomName, (error) => {
       if (error) {
@@ -86,7 +87,7 @@ function removeActiveRoom(roomName) {
 // GET ONE USER
 function getUsersInRoom(roomName) {
   console.log(roomName);
-  const sql = "SELECT username FROM users WHERE active_room = ?";
+  const sql = `SELECT username FROM ${schema}.users WHERE active_room = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName], (error, rows) => {
       if (error) {
@@ -100,7 +101,7 @@ function getUsersInRoom(roomName) {
 
 // DELETE ALL CLIENT CONNECTED USERS
 function deleteUsers(clientID) {
-  const sql = "DELETE from users where id = ?";
+  const sql = `DELETE from ${schema}.users where id = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [clientID], (error) => {
       if (error) {
@@ -114,7 +115,7 @@ function deleteUsers(clientID) {
 
 // DELETE ALL USERS
 function deleteAllUsers() {
-  const sql = "DELETE from users";
+  const sql = `DELETE from ${schema}.users`;
   return new Promise((resolve, reject) => {
     db.query(sql, (error) => {
       if (error) {
