@@ -1,5 +1,4 @@
 const db = require("../config/db");
-const schema = process.env.SCHEMA;
 
 // ADD ONE USER
 async function addUser(id, username) {
