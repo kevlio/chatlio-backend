@@ -11,7 +11,6 @@ const io = new Server({
   cors: {
     origin: ["*", "https://chatlio-frontend.herokuapp.com"],
     methods: ["GET", "POST"],
-    credentials: true,
   },
 });
 
