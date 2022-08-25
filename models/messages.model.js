@@ -9,8 +9,7 @@ function addMessage({
   avatar,
   time,
 }) {
-  const sql =
-    "INSERT INTO messages (message, username, user_id, room_name, color, avatar, time) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  const sql = `INSERT INTO ${process.env.SCHEMA}.messages (message, username, user_id, room_name, color, avatar, time) VALUES (?, ?, ?, ?, ?, ?, ?)`;
   return new Promise((resolve, reject) => {
     db.query(
       sql,
@@ -27,7 +26,7 @@ function addMessage({
 }
 
 function getRoomMessages(roomName) {
-  const sql = "SELECT * FROM messages WHERE room_name = ?";
+  const sql = `SELECT * FROM ${process.env.SCHEMA}.messages WHERE room_name = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName], (error, rows) => {
       if (error) {
@@ -41,7 +40,7 @@ function getRoomMessages(roomName) {
 
 // // DELETE ONE ROOM / REPLACED WITH CONSTRAINT, FK, DELETE CASCADE
 function deleteRoomMessages(roomName) {
-  const sql = "DELETE from messages where room_name = ?";
+  const sql = `DELETE from ${process.env.SCHEMA}.messages where room_name = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName], (error, rows) => {
       if (error) {

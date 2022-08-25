@@ -28,7 +28,7 @@ async function addUser(id, username) {
 
 // GET ALL USERS
 function getUsers() {
-  const sql = "SELECT * FROM heroku_a29865f5352b027.users";
+  const sql = `SELECT * FROM ${process.env.SCHEMA}.users`;
   return new Promise((resolve, reject) => {
     db.query(sql, (error, rows) => {
       if (error) {
@@ -44,8 +44,7 @@ function getUsers() {
 function getOneUser(id, username) {
   console.log(id);
   console.log(username);
-  const sql =
-    "SELECT * FROM heroku_a29865f5352b027.users WHERE id = ? AND name = ?";
+  const sql = `SELECT * FROM ${process.env.SCHEMA}.users WHERE id = ? AND name = ?`;
   return new Promise((resolve, reject) => {
     db.get(sql, [id, username], (error, rows) => {
       if (error) {
@@ -59,8 +58,7 @@ function getOneUser(id, username) {
 
 // UPDATE USERS ACTIVE ROOM / BETTER SOLUTION?
 function updateActiveRoom(roomName, username) {
-  const sql =
-    "UPDATE heroku_a29865f5352b027.users SET active_room = ? WHERE username = ?";
+  const sql = `UPDATE ${process.env.SCHEMA}.users SET active_room = ? WHERE username = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName, username], (error) => {
       if (error) {
@@ -73,8 +71,7 @@ function updateActiveRoom(roomName, username) {
 }
 
 function removeActiveRoom(roomName) {
-  const sql =
-    "UPDATE heroku_a29865f5352b027.users SET active_room = null WHERE active_room = ?";
+  const sql = `UPDATE ${process.env.SCHEMA}.users SET active_room = null WHERE active_room = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, roomName, (error) => {
       if (error) {
@@ -89,8 +86,7 @@ function removeActiveRoom(roomName) {
 // GET ONE USER
 function getUsersInRoom(roomName) {
   console.log(roomName);
-  const sql =
-    "SELECT username FROM heroku_a29865f5352b027.users WHERE active_room = ?";
+  const sql = `SELECT username FROM ${process.env.SCHEMA}.users WHERE active_room = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName], (error, rows) => {
       if (error) {
@@ -104,7 +100,7 @@ function getUsersInRoom(roomName) {
 
 // DELETE ALL CLIENT CONNECTED USERS
 function deleteUsers(clientID) {
-  const sql = "DELETE from heroku_a29865f5352b027.users where id = ?";
+  const sql = `DELETE from ${process.env.SCHEMA}.users where id = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [clientID], (error) => {
       if (error) {
@@ -118,7 +114,7 @@ function deleteUsers(clientID) {
 
 // DELETE ALL USERS
 function deleteAllUsers() {
-  const sql = "DELETE from heroku_a29865f5352b027.users";
+  const sql = `DELETE from ${process.env.SCHEMA}.users`;
   return new Promise((resolve, reject) => {
     db.query(sql, (error) => {
       if (error) {

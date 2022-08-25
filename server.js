@@ -9,8 +9,7 @@ const logMessages = require("./middleware/utils");
 
 const io = new Server({
   cors: {
-    origin: "*",
-    // origin: ["*", "http://localhost:3000", process.env.CLIENT_URL],
+    origin: ["http://localhost:3000", process.env.CLIENT_URL],
     methods: ["GET", "POST"],
   },
 });

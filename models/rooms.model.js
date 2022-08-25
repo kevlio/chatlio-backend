@@ -13,7 +13,7 @@ async function addRoom(roomName) {
     return false;
   }
 
-  const sql = "INSERT INTO rooms (room_name) VALUES (?)";
+  const sql = `INSERT INTO ${process.env.SCHEMA}.rooms (room_name) VALUES (?)`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName], (error) => {
       if (error) {
@@ -26,7 +26,7 @@ async function addRoom(roomName) {
 }
 
 function getRooms() {
-  const sql = "SELECT * FROM rooms";
+  const sql = `SELECT * FROM ${process.env.SCHEMA}.rooms`;
   return new Promise((resolve, reject) => {
     db.query(sql, (error, rows) => {
       if (error) {
@@ -39,7 +39,7 @@ function getRooms() {
 }
 
 function getRoom(roomName) {
-  const sql = "SELECT * FROM rooms WHERE room_name = ?";
+  const sql = `SELECT * FROM ${process.env.SCHEMA}.rooms WHERE room_name = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, roomName, (error, rows) => {
       if (error) {
@@ -53,7 +53,7 @@ function getRoom(roomName) {
 
 // DELETE ONE ROOM (and messages connected to room)
 function deleteRoom(roomName) {
-  const sql = "DELETE from rooms where room_name = ?";
+  const sql = `DELETE from ${process.env.SCHEMA}.rooms where room_name = ?`;
   return new Promise((resolve, reject) => {
     db.query(sql, [roomName], (error) => {
       if (error) {
