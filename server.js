@@ -214,3 +214,5 @@ io.on("connection", async (socket) => {
     io.emit("message", "A user has left the chat");
   });
 });
+
+io.listen(process.env.PORT || 4000);
