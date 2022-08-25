@@ -14,8 +14,7 @@ async function addUser(id, username) {
     return false;
   }
 
-  const sql =
-    "INSERT INTO heroku_a29865f5352b027.users (id, username) VALUES (?, ?)";
+  const sql = `INSERT INTO ${process.env.SCHEMA}.users (id, username) VALUES (?, ?)`;
   return new Promise((resolve, reject) => {
     db.query(sql, [id, username], (error) => {
       if (error) {
