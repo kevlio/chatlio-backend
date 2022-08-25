@@ -23,7 +23,8 @@ const room = `CREATE TABLE IF NOT EXISTS rooms(
 const user = `CREATE TABLE IF NOT EXISTS users(
   id TEXT, 
   username VARCHAR(255) PRIMARY KEY,
-  active_room TEXT)`;
+  active_room TEXT
+  )`;
 
 const message = `CREATE TABLE IF NOT EXISTS messages(
   message TEXT NOT NULL,
