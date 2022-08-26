@@ -12,16 +12,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "knex": "^2.1.0",
+    "eslint": "^8.22.0",
     "luxon": "^2.4.0",
     "moment": "^2.29.3",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "pg": "^8.8.0",
-    "pgtools": "^0.3.2",
-    "postgres": "^3.2.4",
     "socket.io": "^4.5.1",
-    "sqlite3": "^5.0.8",
     "uuid": "^8.3.2"
   }
 }
